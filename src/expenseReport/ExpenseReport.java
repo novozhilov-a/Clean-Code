@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExpenseReport {
-  private List<Expense> expenses = new ArrayList<Expense>();
+  private List<Expense> expenses = new ArrayList<>();
   private int total;
   private int mealExpenses;
 
