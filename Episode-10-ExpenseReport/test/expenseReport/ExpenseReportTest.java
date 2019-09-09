@@ -46,6 +46,21 @@ public class ExpenseReportTest {
     }
 
     @Test
+    public void print_one_lunch() {
+        report.addExpense(new Expense(LUNCH, 912));
+        report.printReport(printer);
+        System.out.println(printer.getText());
+
+        assertEquals(
+                "Expenses 9/12/2002\n" +
+                        " \tLunch\t$9,12\n" +
+                        "\n" +
+                        "Meal expenses $9,12\n" +
+                        "Total $9,12",
+                printer.getText());
+    }
+
+    @Test
     public void twoMeals() {
         report.addExpense(new Expense(DINNER, 1000));
         report.addExpense(new Expense(BREAKFAST, 500));
@@ -93,6 +108,26 @@ public class ExpenseReportTest {
                 "Expenses 9/12/2002\n" +
                         " \tBreakfast\t$10,00\n" +
                         "X\tBreakfast\t$10,01\n" +
+                        " \tDinner\t$50,00\n" +
+                        "X\tDinner\t$50,01\n" +
+                        "\n" +
+                        "Meal expenses $120,02\n" +
+                        "Total $120,02",
+                printer.getText());
+    }
+    @Test
+    public void overages_with_lunch() {
+        report.addExpense(new Expense(LUNCH, 1000));
+        report.addExpense(new Expense(LUNCH, 1001));
+        report.addExpense(new Expense(DINNER, 5000));
+        report.addExpense(new Expense(DINNER, 5001));
+        report.printReport(printer);
+        System.out.println(printer.getText());
+
+        assertEquals(
+                "Expenses 9/12/2002\n" +
+                        " \tLunch\t$10,00\n" +
+                        "X\tLunch\t$10,01\n" +
                         " \tDinner\t$50,00\n" +
                         "X\tDinner\t$50,01\n" +
                         "\n" +
