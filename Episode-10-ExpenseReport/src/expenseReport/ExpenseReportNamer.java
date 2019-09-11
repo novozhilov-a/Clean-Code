@@ -7,6 +7,8 @@ public class ExpenseReportNamer implements ExpenseNamer {
       return "Dinner";
     else if (expense instanceof BreakfastExpense)
       return "Breakfast";
+    else if (expense instanceof LunchExpense)
+      return "Lunch";
     else if (expense instanceof CarRentalExpense)
       return "Car Rental";
     else

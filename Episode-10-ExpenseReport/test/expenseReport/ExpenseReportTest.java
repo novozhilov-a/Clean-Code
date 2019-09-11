@@ -45,6 +45,21 @@ public class ExpenseReportTest {
     }
 
     @Test
+    public void printOneLunch() {
+        report.addExpense(new LunchExpense(1678));
+        reporter.printReport(printer);
+//        System.out.println(printer.getText());
+
+        assertEquals(
+                "Expenses 9/12/2002\n" +
+                        " \tLunch\t$16,78\n" +
+                        "\n" +
+                        "Meal expenses $16,78\n" +
+                        "Total $16,78",
+                printer.getText());
+    }
+
+    @Test
     public void twoMeals() {
         report.addExpense(new DinnerExpense(1000));
         report.addExpense(new BreakfastExpense(500));
@@ -85,6 +100,8 @@ public class ExpenseReportTest {
         report.addExpense(new BreakfastExpense(1001));
         report.addExpense(new DinnerExpense(5000));
         report.addExpense(new DinnerExpense(5001));
+        report.addExpense(new LunchExpense(2000));
+        report.addExpense(new LunchExpense(2001));
         reporter.printReport(printer);
 //        System.out.println(printer.getText());
 
@@ -94,9 +111,11 @@ public class ExpenseReportTest {
                         "X\tBreakfast\t$10,01\n" +
                         " \tDinner\t$50,00\n" +
                         "X\tDinner\t$50,01\n" +
+                        " \tLunch\t$20,00\n" +
+                        "X\tLunch\t$20,01\n" +
                         "\n" +
-                        "Meal expenses $120,02\n" +
-                        "Total $120,02",
+                        "Meal expenses $160,03\n" +
+                        "Total $160,03",
                 printer.getText());
     }
 
