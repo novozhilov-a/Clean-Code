@@ -3,7 +3,7 @@ package expenseReport;
 public class ExpenseReporter {
   ReportPrinter printer;
   private ExpenseReport report;
-  private ExpenseNamer namer = new ExpenseReportNamer();
+  ExpenseNamer namer = new ExpenseNamerMyImpl();
 
   public ExpenseReporter(ExpenseReport report) {
     this.report = report;
@@ -33,7 +33,8 @@ public class ExpenseReporter {
   private void printExpense(Expense expense) {
     printer.print(String.format("%s\t%s\t$%.02f\n",
       expense.isOverage() ? "X" : " ",
-      namer.getName(expense),
+      //namer.getClassName(expense),
+      namer.translateName(expense.getClassName()),
       penniesToDollars(expense.getAmount())));
   }
 
